@@ -2,16 +2,14 @@
 
 const userForm = new UserForm();
 
-/* в описании классов, в методе используют {login, password}, а в примере видео data, тоже не нашел нигде в коде свять, что по итогу использовать?*/
 userForm.loginFormCallback = data => {
     
-    /* Проверьте успешность запроса.  понять какой аргумент использова, нужно ведь сравнить имеющамися логинами и паролями и сравнить?*/ 
-    let callback = () => {
+    let callback = (response) => {
 
-        if () {
+        if (response.executed) {
             location.reload()
         } else {
-            setLoginErrorMessage('message')
+            userForm.setLoginErrorMessage(response.error)
         }
     }
 
@@ -20,11 +18,11 @@ userForm.loginFormCallback = data => {
 
 userForm.registerFormAction = data => {
 
-    let callback = () => {
-        if () {
+    let callback = (response) => {
+        if (response.executed) {
             location.reload()
         } else {
-            registerErrorMessageBox('message')
+            userForm.registerErrorMessageBox(response.error)
         }
     }
 
