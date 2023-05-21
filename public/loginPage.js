@@ -2,29 +2,29 @@
 
 const userForm = new UserForm();
 
-userForm.loginFormCallback = data => {
+userForm.loginFormCallback = ({login, password}) => {
     
     let callback = (response) => {
 
-        if (response.executed) {
+        if (response.success) {
             location.reload()
         } else {
             userForm.setLoginErrorMessage(response.error)
         }
     }
 
-    ApiConnector.login(data, callback)
+    ApiConnector.login({login, password}, callback)
 }
 
-userForm.registerFormAction = data => {
+userForm.registerFormCallback = ({login, password}) => {
 
     let callback = (response) => {
-        if (response.executed) {
+        if (response.success) {
             location.reload()
         } else {
-            userForm.registerErrorMessageBox(response.error)
+            userForm.setRegisterErrorMessagex(response.error)
         }
     }
 
-    ApiConnector.register(data, callback)
+    ApiConnector.register({login, password}, callback)
 }
