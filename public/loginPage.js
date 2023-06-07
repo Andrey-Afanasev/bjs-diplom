@@ -22,7 +22,7 @@ userForm.registerFormCallback = ({login, password}) => {
         if (response.success) {
             location.reload()
         } else {
-            userForm.setRegisterErrorMessagex(response.error)
+            userForm.setRegisterErrorMessage(response.error)
         }
     }
 
