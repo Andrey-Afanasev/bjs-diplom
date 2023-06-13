@@ -89,3 +89,44 @@ moneyManager.sendMoneyCallback = ({to, currency, amount}) => {
 
 const favoritesWidget = new FavoritesWidget();
 
+ApiConnector.getFavorites((response) => { if (response) {
+  favoritesWidget.clearTable();
+  favoritesWidget.fillTable(response.data);
+  moneyManager.updateUsersList(response.data);
+
+
+}
+})
+
+///////////////////
+
+favoritesWidget.addUserCallback = ({id, name}) => {
+  const callback = (response) => {
+    if (response.success) {
+      favoritesWidget.clearTable();
+      favoritesWidget.fillTable(response.data);
+      moneyManager.updateUsersList(response.data);
+      favoritesWidget.setMessage(response.success, `Пользователь ${name} успешно добавлен`);
+    } else {
+      favoritesWidget.setMessage(response.success, response.error);
+    }
+  };
+  ApiConnector.addUserToFavorites({id, name}, callback);
+};
+
+///////////////////
+
+
+favoritesWidget.removeUserCallback = (id) => {
+  const callback = (response) => {
+    if (response.success) {
+      favoritesWidget.clearTable();
+      favoritesWidget.fillTable(response.data);
+      moneyManager.updateUsersList(response.data);
+      favoritesWidget.setMessage(response.success, `Пользователь удален`);
+    } else {
+      favoritesWidget.setMessage(response.success, response.error);
+    }
+  };
+  ApiConnector.removeUserFromFavorites(id, callback);
+};
