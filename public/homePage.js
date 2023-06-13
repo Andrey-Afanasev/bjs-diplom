@@ -42,7 +42,7 @@ setInterval(() => requestRatesBoard(), 60000)
 
 const moneyManager = new MoneyManager();
 
-moneyManager.addMoneyCallback = () => {
+moneyManager.addMoneyCallback = ({currency, amount}) => {
 
   const callback = (response) => {
     if (response.success) {
